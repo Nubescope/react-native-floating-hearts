@@ -102,7 +102,7 @@ export default App
 | Props name        | Type     | Description                                          | Default |
 |-------------------|----------|------------------------------------------------------|---------|
 | heartCount*       | Number   | The added heart count                                |         |
-| renderCustomShape | Function | Renders a custom shape instead of a card             |         |
+| renderCustomShape | Function | Renders a custom shape instead of a heart             |         |
 
 *required
 
