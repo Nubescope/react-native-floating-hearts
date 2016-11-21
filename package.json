@@ -16,7 +16,7 @@
     "periscope",
     "hearts",
     "floating",
-    "animation",
+    "animation"
   ],
   "main": "index.js",
   "scripts": {
