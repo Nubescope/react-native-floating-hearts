@@ -48,9 +48,18 @@ class FloatingHearts extends Component {
 
   render() {
     const { height } = this.state
-    const { renderCustomShape } = this.props
+    const { heartColor, renderCustomShape } = this.props
     const isReady = height !== null
-    const shape = renderCustomShape ? renderCustomShape() : <HeartShape />
+
+    let heartProps = {}
+
+    if (heartColor !== null) {
+      heartProps.color = heartColor
+    }
+
+    const shape = renderCustomShape ? 
+      renderCustomShape() : 
+      <HeartShape {...heartProps} />
 
     return (
       <View style={[styles.container, this.props.style]} onLayout={this.handleOnLayout}>
@@ -72,6 +81,7 @@ class FloatingHearts extends Component {
 FloatingHearts.propTypes = {
   style: View.propTypes.style,
   heartCount: PropTypes.number,
+  heartColor: PropTypes.string,
   renderCustomShape: PropTypes.func,
 }
 
