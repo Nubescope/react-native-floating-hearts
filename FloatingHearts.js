@@ -4,12 +4,6 @@ import { View, Animated, StyleSheet } from 'react-native'
 import HeartShape from './HeartShape'
 
 /**
- * Heart Index
- */
-
-let heartIndex = 1
-
-/**
  * @class FloatingHearts
  */
 
@@ -20,9 +14,9 @@ class FloatingHearts extends Component {
     height: null,
   }
 
-  addHeart() {
+  addHeart(index) {
     this.state.hearts.push({
-      id: heartIndex++,
+      id: index,
       right: getRandomNumber(50, 150)
     })
     this.setState(this.state)
@@ -35,8 +29,8 @@ class FloatingHearts extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.heartCount !== this.props.heartCount) {
-      this.addHeart()
+    if (nextProps.count !== this.props.count) {
+      this.addHeart(nextProps.count)
     }
   }
 
@@ -48,29 +42,24 @@ class FloatingHearts extends Component {
 
   render() {
     const { height } = this.state
-    const { heartColor, renderCustomShape } = this.props
+    const { color, renderCustomShape } = this.props
     const isReady = height !== null
 
     let heartProps = {}
-
-    if (heartColor !== null) {
-      heartProps.color = heartColor
+    if (color !== null) {
+      heartProps.color = color
     }
-
-    const shape = renderCustomShape ? 
-      renderCustomShape() : 
-      <HeartShape {...heartProps} />
 
     return (
       <View style={[styles.container, this.props.style]} onLayout={this.handleOnLayout}>
-        {isReady && this.state.hearts.map(item => (
+        {isReady && this.state.hearts.map(({ id, right }) => (
           <AnimatedShape
-            key={item.id}
+            key={id}
             height={height}
-            style={{ right: item.right }}
-            onComplete={this.removeHeart.bind(this, item.id)}
+            style={{ right }}
+            onComplete={this.removeHeart.bind(this, id)}
           >
-            {shape}
+            {renderCustomShape ? renderCustomShape(id) : <HeartShape {...heartProps} />}
           </AnimatedShape>
         ))}
       </View>
@@ -80,13 +69,13 @@ class FloatingHearts extends Component {
 
 FloatingHearts.propTypes = {
   style: View.propTypes.style,
-  heartCount: PropTypes.number,
-  heartColor: PropTypes.string,
+  count: PropTypes.number,
+  color: PropTypes.string,
   renderCustomShape: PropTypes.func,
 }
 
 FloatingHearts.defaultProps = {
-  heartCount: -1,
+  count: -1,
 }
 
 /**

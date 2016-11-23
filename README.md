@@ -21,19 +21,19 @@ import FloatingHearts from 'react-native-floating-hearts'
 
 class App extends Component {
   state = {
-    heartCount: 0,
+    count: 0,
   }
 
   render() {
-    const { heartCount } = this.state
+    const { count } = this.state
 
     return (
       <TouchableOpacity
         activeOpacity={1}
         style={styles.container}
-        onPress={() => this.setState({ heartCount: heartCount + 1 })}
+        onPress={() => this.setState({ count: count + 1 })}
       >
-        <FloatingHearts heartCount={heartCount} />
+        <FloatingHearts count={count} />
       </TouchableOpacity>
     )
   }
@@ -59,20 +59,20 @@ import FloatingHearts from 'react-native-floating-hearts'
 
 class App extends Component {
   state = {
-    heartCount: 0,
+    count: 0,
   }
 
   render() {
-    const { heartCount } = this.state
+    const { count } = this.state
 
     return (
       <TouchableOpacity
         activeOpacity={1}
         style={styles.container}
-        onPress={() => this.setState({ heartCount: heartCount + 1 })}
+        onPress={() => this.setState({ count: count + 1 })}
       >
         <FloatingHearts 
-          heartCount={heartCount} 
+          count={count} 
           renderCustomShape={() => {
             return <View style={styles.square} />
           }}
@@ -101,8 +101,8 @@ export default App
 
 | Props name        | Type     | Description                                          | Default |
 |-------------------|----------|------------------------------------------------------|---------|
-| heartCount*       | Number   | The added heart count                                |         |
-| heartColor        | Number   | The added heart count                                | 'red'   |
+| count*            | Number   | Adds a heart when incrmented                         |         |
+| color             | Number   | The hearts color                                     | 'red'   |
 | renderCustomShape | Function | Renders a custom shape instead of a heart            |         |
 
 (*) required
