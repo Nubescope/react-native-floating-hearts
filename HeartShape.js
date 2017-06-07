@@ -5,8 +5,13 @@ import { Image } from 'react-native'
  * @class HeartShape
  */
 
-const HeartShape = props => {
-  return <Image source={require('./heart.png')} tintColor={props.color} />
+const HeartShape = ({color}) => {
+  return (
+    <Image
+      source={require('./heart.png')}
+      style={{tintColor: color}}
+    />
+  );
 }
 
 HeartShape.propTypes = {
