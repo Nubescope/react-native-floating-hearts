@@ -51,7 +51,11 @@ class FloatingHearts extends Component {
     }
 
     return (
-      <View style={[styles.container, this.props.style]} onLayout={this.handleOnLayout}>
+      <View
+        style={[styles.container, this.props.style]}
+        onLayout={this.handleOnLayout}
+        pointerEvents="none"
+      >
         {isReady && this.state.hearts.map(({ id, right }) => (
           <AnimatedShape
             key={id}
@@ -183,7 +187,11 @@ AnimatedShape.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position: 'absolute',
   },
 
   shapeWrapper: {
