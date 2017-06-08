@@ -101,7 +101,7 @@ export default App
 
 | Props name        | Type     | Description                                          | Default |
 |-------------------|----------|------------------------------------------------------|---------|
-| count*            | Number   | Adds a heart when incrmented                         |         |
+| count*            | Number   | Adds a heart when incremented                        |         |
 | color             | Number   | The hearts color                                     | 'red'   |
 | renderCustomShape | Function | Renders a custom shape instead of a heart            |         |
 
