@@ -14,24 +14,29 @@ class FloatingHearts extends Component {
     height: null,
   }
 
-  addHeart(index) {
-    this.state.hearts.push({
+  createHeart(index) {
+    console.log(index)
+    return {
       id: index,
       right: getRandomNumber(50, 150)
-    })
-    this.setState(this.state)
+    }
   }
 
   removeHeart(id) {
-    let index = this.state.hearts.findIndex(heart => heart.id === id)
-    this.state.hearts.splice(index, 1)
-    this.setState(this.state)
+    this.setState({hearts: this.state.hearts.filter(heart => heart.id !== id)})
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.count !== this.props.count) {
-      this.addHeart(nextProps.count)
-    }
+    const oldCount = this.props.count
+    const newCount = nextProps.count
+    const numHearts = newCount - oldCount
+
+    if (numHearts <= 0) return
+
+    const newHearts = [...Array(numHearts).keys()]
+      .map(index => oldCount + index)
+      .map(this.createHeart)
+    this.setState({hearts: this.state.hearts.concat(newHearts)})
   }
 
   handleOnLayout = e => {
