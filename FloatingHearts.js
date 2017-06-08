@@ -15,7 +15,6 @@ class FloatingHearts extends Component {
   }
 
   createHeart(index) {
-    console.log(index)
     return {
       id: index,
       right: getRandomNumber(50, 150)
