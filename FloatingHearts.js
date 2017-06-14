@@ -8,7 +8,6 @@ import HeartShape from './HeartShape'
  */
 
 class FloatingHearts extends Component {
-
   state = {
     hearts: [],
     height: null,
@@ -17,12 +16,12 @@ class FloatingHearts extends Component {
   createHeart(index) {
     return {
       id: index,
-      right: getRandomNumber(50, 150)
+      right: getRandomNumber(50, 150),
     }
   }
 
   removeHeart(id) {
-    this.setState({hearts: this.state.hearts.filter(heart => heart.id !== id)})
+    this.setState({ hearts: this.state.hearts.filter(heart => heart.id !== id) })
   }
 
   componentWillUpdate(nextProps) {
@@ -32,10 +31,8 @@ class FloatingHearts extends Component {
 
     if (numHearts <= 0) return
 
-    const newHearts = [...Array(numHearts).keys()]
-      .map(index => oldCount + index)
-      .map(this.createHeart)
-    this.setState({hearts: this.state.hearts.concat(newHearts)})
+    const newHearts = [...Array(numHearts).keys()].map(index => oldCount + index).map(this.createHeart)
+    this.setState({ hearts: this.state.hearts.concat(newHearts) })
   }
 
   handleOnLayout = e => {
@@ -55,21 +52,13 @@ class FloatingHearts extends Component {
     }
 
     return (
-      <View
-        style={[styles.container, this.props.style]}
-        onLayout={this.handleOnLayout}
-        pointerEvents="none"
-      >
-        {isReady && this.state.hearts.map(({ id, right }) => (
-          <AnimatedShape
-            key={id}
-            height={height}
-            style={{ right }}
-            onComplete={this.removeHeart.bind(this, id)}
-          >
-            {renderCustomShape ? renderCustomShape(id) : <HeartShape {...heartProps} />}
-          </AnimatedShape>
-        ))}
+      <View style={[styles.container, this.props.style]} onLayout={this.handleOnLayout} pointerEvents="none">
+        {isReady &&
+          this.state.hearts.map(({ id, right }) =>
+            <AnimatedShape key={id} height={height} style={{ right }} onComplete={this.removeHeart.bind(this, id)}>
+              {renderCustomShape ? renderCustomShape(id) : <HeartShape {...heartProps} />}
+            </AnimatedShape>
+          )}
       </View>
     )
   }
@@ -167,7 +156,10 @@ class AnimatedShape extends Component {
 
   render() {
     return (
-      <Animated.View style={[styles.shapeWrapper, this.getAnimationStyle(), this.props.style]} onLayout={this.handleOnLayout}>
+      <Animated.View
+        style={[styles.shapeWrapper, this.getAnimationStyle(), this.props.style]}
+        onLayout={this.handleOnLayout}
+      >
         {this.props.children}
       </Animated.View>
     )
@@ -182,7 +174,7 @@ AnimatedShape.propTypes = {
 }
 
 AnimatedShape.defaultProps = {
-  onComplete: () => {}
+  onComplete: () => {},
 }
 
 /**
@@ -209,7 +201,7 @@ const styles = StyleSheet.create({
  * Helpers
  */
 
-const getRandomNumber = (min, max) => (Math.random() * (max - min) + min)
+const getRandomNumber = (min, max) => Math.random() * (max - min) + min
 
 /**
  * Exports
