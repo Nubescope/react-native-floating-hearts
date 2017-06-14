@@ -29,9 +29,13 @@ class FloatingHearts extends Component {
     const newCount = nextProps.count
     const numHearts = newCount - oldCount
 
-    if (numHearts <= 0) return
+    if (numHearts <= 0) {
+      return
+    }
 
-    const newHearts = [...Array(numHearts).keys()].map(index => oldCount + index).map(this.createHeart)
+    const items = Array(numHearts).fill()
+    const newHearts = items.map((item, i) => oldCount + i).map(this.createHeart)
+
     this.setState({ hearts: this.state.hearts.concat(newHearts) })
   }
 
