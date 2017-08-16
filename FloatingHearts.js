@@ -16,7 +16,7 @@ class FloatingHearts extends Component {
   createHeart(index) {
     return {
       id: index,
-      right: getRandomNumber(50, 150),
+      right: getRandomNumber(this.props.rightMin?this.props.rightMin:50, this.props.rightMax?this.props.rightMax:150),
     }
   }
 
@@ -142,7 +142,7 @@ class AnimatedShape extends Component {
 
     this.scaleAnimation = this.yAnimation.interpolate({
       inputRange: [0, 15, 30, height],
-      outputRange: [0, 1.2, 1, 1],
+      outputRange: [0, 1.2, 1, this.props.shrinkTo?this.props.shrinkTo:1],
     })
 
     this.xAnimation = this.yAnimation.interpolate({
