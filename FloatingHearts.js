@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Animated, StyleSheet } from 'react-native'
-
+import React, { Component } from 'react'
+import { View, Animated, StyleSheet, ViewPropTypes } from 'react-native'
+import { PropTypes } from 'prop-types';
 import HeartShape from './HeartShape'
 
 /**
@@ -16,7 +16,7 @@ class FloatingHearts extends Component {
   createHeart(index) {
     return {
       id: index,
-      right: getRandomNumber(50, 150),
+      right: getRandomNumber(this.props.rightMin?this.props.rightMin:50, this.props.rightMax?this.props.rightMax:150),
     }
   }
 
@@ -34,7 +34,7 @@ class FloatingHearts extends Component {
     }
 
     const items = Array(numHearts).fill()
-    const newHearts = items.map((item, i) => oldCount + i).map(this.createHeart)
+    const newHearts = items.map((item, i) => oldCount + i).map(this.createHeart.bind(this))
 
     this.setState({ hearts: this.state.hearts.concat(newHearts) })
   }
@@ -69,7 +69,7 @@ class FloatingHearts extends Component {
 }
 
 FloatingHearts.propTypes = {
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   count: PropTypes.number,
   color: PropTypes.string,
   renderCustomShape: PropTypes.func,
@@ -142,7 +142,7 @@ class AnimatedShape extends Component {
 
     this.scaleAnimation = this.yAnimation.interpolate({
       inputRange: [0, 15, 30, height],
-      outputRange: [0, 1.2, 1, 1],
+      outputRange: [0, 1.2, 1, this.props.shrinkTo?this.props.shrinkTo:1],
     })
 
     this.xAnimation = this.yAnimation.interpolate({
@@ -173,7 +173,7 @@ class AnimatedShape extends Component {
 AnimatedShape.propTypes = {
   height: PropTypes.number.isRequired,
   onComplete: PropTypes.func.isRequired,
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   children: PropTypes.node.isRequired,
 }
 
