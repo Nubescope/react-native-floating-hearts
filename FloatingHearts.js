@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Animated, StyleSheet } from 'react-native'
+import { View, Animated, StyleSheet, ViewPropTypes } from 'react-native'
 
 import HeartShape from './HeartShape'
 
@@ -59,18 +59,18 @@ class FloatingHearts extends Component {
     return (
       <View style={[styles.container, this.props.style]} onLayout={this.handleOnLayout} pointerEvents="none">
         {isReady &&
-          this.state.hearts.map(({ id, right }) =>
+          this.state.hearts.map(({ id, right }) => (
             <AnimatedShape key={id} height={height} style={{ right }} onComplete={this.removeHeart.bind(this, id)}>
               {renderCustomShape ? renderCustomShape(id) : <HeartShape {...heartProps} />}
             </AnimatedShape>
-          )}
+          ))}
       </View>
     )
   }
 }
 
 FloatingHearts.propTypes = {
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   count: PropTypes.number,
   color: PropTypes.string,
   renderCustomShape: PropTypes.func,
