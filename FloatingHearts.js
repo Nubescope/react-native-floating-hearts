@@ -70,7 +70,7 @@ class FloatingHearts extends Component {
 }
 
 FloatingHearts.propTypes = {
-  style: ViewPropTypes.style,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   count: PropTypes.number,
   color: PropTypes.string,
   renderCustomShape: PropTypes.func,
@@ -174,7 +174,7 @@ class AnimatedShape extends Component {
 AnimatedShape.propTypes = {
   height: PropTypes.number.isRequired,
   onComplete: PropTypes.func.isRequired,
-  style: View.propTypes.style,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
 }
 
