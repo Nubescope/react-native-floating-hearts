@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Image } from 'react-native'
+import { Image, ImageSourcePropType } from 'react-native'
 
 /**
  * @class HeartShape
  */
 
-const HeartShape = ({ color }) => {
-  return <Image source={require('./heart.png')} style={{ tintColor: color }} />
+const HeartShape = ({ color, imageSource }) => {
+  return <Image source={ imageSource ||require('./heart.png')} style={{ tintColor: color }} />
 }
 
 HeartShape.propTypes = {
   color: PropTypes.string,
+  imageSource: ImageSourcePropType
 }
 
 HeartShape.defaultProps = {
