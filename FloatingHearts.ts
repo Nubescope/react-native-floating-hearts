@@ -25,7 +25,7 @@ class FloatingHearts extends Component {
     this.setState({ hearts: this.state.hearts.filter(heart => heart.id !== id) })
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     const oldCount = this.props.count
     const newCount = nextProps.count
     const numHearts = newCount - oldCount
